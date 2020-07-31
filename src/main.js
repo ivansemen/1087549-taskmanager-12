@@ -117,7 +117,7 @@ const createSortTemplate = () => {
   );
 };
 
-const createTasksTemplate = () => {
+const createTaskTemplate = () => {
   return (
     `<article class="card card--black">
       <div class="card__form">
@@ -161,7 +161,7 @@ const createTasksTemplate = () => {
   );
 };
 
-const createTasksEditTemplate = () => {
+const createTaskEditTemplate = () => {
   return (
     `<article class="card card--edit card--yellow card--repeat">
       <form class="card__form" method="get">
@@ -377,10 +377,10 @@ const boardElement = siteMainElement.querySelector(`.board`);
 const tasksElement = boardElement.querySelector(`.board__tasks`);
 
 render(boardElement, createSortTemplate(), `afterbegin`);
-render(tasksElement, createTasksEditTemplate(), `beforeend`);
+render(tasksElement, createTaskEditTemplate(), `beforeend`);
 
 for (let i = 0; i < TASK_COUNT; i++) {
-  render(tasksElement, createTasksTemplate(), `beforeend`);
+  render(tasksElement, createTaskTemplate(), `beforeend`);
 }
 
 render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
