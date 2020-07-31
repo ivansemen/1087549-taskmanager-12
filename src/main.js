@@ -117,7 +117,7 @@ const createSortTemplate = () => {
   );
 };
 
-const createTaskTemplate = () => {
+const createTasksTemplate = () => {
   return (
     `<article class="card card--black">
       <div class="card__form">
@@ -161,7 +161,7 @@ const createTaskTemplate = () => {
   );
 };
 
-const createTaskEditTemplate = () => {
+const createTasksEditTemplate = () => {
   return (
     `<article class="card card--edit card--yellow card--repeat">
       <form class="card__form" method="get">
@@ -374,13 +374,13 @@ render(siteMainElement, createFilterTemplate(), `beforeend`);
 render(siteMainElement, createBoardTemplate(), `beforeend`);
 
 const boardElement = siteMainElement.querySelector(`.board`);
-const taskListElement = boardElement.querySelector(`.board__tasks`);
+const tasksElement = boardElement.querySelector(`.board__tasks`);
 
 render(boardElement, createSortTemplate(), `afterbegin`);
-render(taskListElement, createTaskEditTemplate(), `beforeend`);
+render(tasksElement, createTasksEditTemplate(), `beforeend`);
 
 for (let i = 0; i < TASK_COUNT; i++) {
-  render(taskListElement, createTaskTemplate(), `beforeend`);
+  render(tasksElement, createTasksTemplate(), `beforeend`);
 }
 
 render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
