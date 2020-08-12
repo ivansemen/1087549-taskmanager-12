@@ -1,10 +1,60 @@
+const isExpired = (dueDate) => {
+  if (dueDate === null) {
+    return false;
+  }
+
+  const currentDate = new Date();
+
+  currentDate.setHours(23, 59, 59, 999);
+
+  return currentDate > dueDate.getTime();
+};
+
+const createTaskEditorDateTemplate = (dueDate) => {
+  return `<button class="card__date-deadline-toggle" type="button">
+      date: <span class="card__date-status">${dueDate !== null ? `yes` : `no`}</span>
+    </button>
+    ${dueDate !== null ? `<fieldset class="card__date-deadline">
+      <label class="card__input-deadline-wrap">
+        <input
+          class="card__date"
+          type="text"
+          placeholder=""
+          name="date"
+          value="${dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`})}"
+        />
+      </label>
+    </fieldset>` : ``}
+  `;
+};
+
+
 export const createTaskEditorTemplate = (task = {}) => {
   const {
     color = `black`,
     description = ``,
+    dueDate = null,
+    repeating = {
+      mo: false,
+      tu: false,
+      we: false,
+      th: false,
+      fr: false,
+      sa: false,
+      su: false
+    }
   } = task;
 
-  return `<article class="card card--edit card--${color} card--repeat">
+  const deadlineClassName = isExpired(dueDate) ?
+    `card--deadline` :
+    ``;
+  const dateTemplate = createTaskEditorDateTemplate(dueDate);
+
+  const repeatingClassName = Object.values(repeating).some(Boolean) ?
+    `card--repeat` :
+    ``;
+
+  return `<article class="card card--edit card--${color} ${deadlineClassName} ${repeatingClassName}">
       <form class="card__form" method="get">
         <div class="card__inner">
           <div class="card__color-bar">
@@ -24,20 +74,7 @@ export const createTaskEditorTemplate = (task = {}) => {
           <div class="card__settings">
             <div class="card__details">
               <div class="card__dates">
-                <button class="card__date-deadline-toggle" type="button">
-                  date: <span class="card__date-status">yes</span>
-                </button>
-                <fieldset class="card__date-deadline">
-                  <label class="card__input-deadline-wrap">
-                    <input
-                      class="card__date"
-                      type="text"
-                      placeholder=""
-                      name="date"
-                      value="23 September"
-                    />
-                  </label>
-                </fieldset>
+                 ${dateTemplate}
                 <button class="card__repeat-toggle" type="button">
                   repeat:<span class="card__repeat-status">yes</span>
                 </button>
