@@ -29,18 +29,18 @@ const generateDate = () => {
 
   currentDate.setDate(currentDate.getDate() + daysGap);
 
-  return new Date(currentDate);
+  return currentDate;
 };
 
 const generateRepeating = () => {
   return {
-    mo: false,
-    tu: false,
+    mo: Boolean(getRandomInteger(0, 1)),
+    tu: Boolean(getRandomInteger(0, 1)),
     we: Boolean(getRandomInteger(0, 1)),
-    th: false,
+    th: Boolean(getRandomInteger(0, 1)),
     fr: Boolean(getRandomInteger(0, 1)),
-    sa: false,
-    su: false
+    sa: Boolean(getRandomInteger(0, 1)),
+    su: Boolean(getRandomInteger(0, 1))
   };
 };
 
