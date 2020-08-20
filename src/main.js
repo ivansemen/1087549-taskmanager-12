@@ -3,7 +3,7 @@ import LoadMoreButtonView from "./view/button-load";
 import BoardView from "./view/board";
 import SortView from "./view/sort";
 import TaskListView from "./view/task-list.js";
-import {createFilterTemplate} from "./view/filter";
+import FilterView from "./view/filter";
 import {createTaskTemplate} from "./view/task";
 import {createTaskEditorTemplate} from "./view/task-edit";
 import {generateTask} from "./mock/task";
@@ -21,7 +21,7 @@ const siteMainElement = document.querySelector(`.main`);
 const siteHeaderElement = siteMainElement.querySelector(`.main__control`);
 
 renderElement(siteHeaderElement, new MenuView().getElement(), RenderPosition.BEFOREEND);
-renderTemplate(siteMainElement, createFilterTemplate(filters), `beforeend`);
+renderElement(siteMainElement, new FilterView(filters).getElement(), RenderPosition.BEFOREEND);
 
 const boardComponent = new BoardView();
 renderElement(siteMainElement, boardComponent.getElement(), RenderPosition.BEFOREEND);
