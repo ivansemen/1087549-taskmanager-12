@@ -1,6 +1,6 @@
 import {createElement} from "../utils";
 
-export const createMenuTemplate = () => {
+const createMenuTemplate = () => {
   return `<section class="control__btn-wrap">
       <input
         type="radio"
