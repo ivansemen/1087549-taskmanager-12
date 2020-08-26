@@ -82,9 +82,9 @@ const createTaskEditorTemplate = (task = {}) => {
     ``;
   const dateTemplate = createTaskEditorDateTemplate(dueDate);
 
-  const repeatingClassName = isTaskRepeating(repeating)
-    ? `card--repeat`
-    : ``;
+  const repeatingClassName = isTaskRepeating(repeating) ?
+    `card--repeat` :
+    ``;
   const repeatingTemplate = createTaskEditorRepeatingTemplate(repeating);
   const colorsTemplate = createTaskEditorColorsTemplate(color);
 
@@ -132,9 +132,20 @@ export default class TaskEdit extends AbstractView {
   constructor(task) {
     super();
     this._task = task || BLANK_TASK;
+    this._formSubmitHandler = this._formSubmitHandler.bind(this);
   }
 
   getTemplate() {
     return createTaskEditorTemplate(this._task);
+  }
+
+  _formSubmitHandler(evt) {
+    evt.preventDefault();
+    this._callback.formSubmit();
+  }
+
+  setFormSubmitHandler(callback) {
+    this._callback.formSubmit = callback;
+    this.getElement().querySelector(`form`).addEventListener(`submit`, this._formSubmitHandler);
   }
 }
